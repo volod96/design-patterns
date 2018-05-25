@@ -6,7 +6,7 @@ import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 /**
- * A unit capable of accomodating customers
+ * A unit capable of accommodating customers
  * @see Room
  */
 public class Hotel {
@@ -21,10 +21,10 @@ public class Hotel {
 	 */
 	private void generareRoomNumbers(int floors, int roomsPerFloor) {
 		for(int floor = 0; floor <= floors; floor++) {
+			final int currentFloor = floor;
 			int floorPrefix = floor * 100;		
-			 this.rooms = (ArrayList<Room>)Stream.concat(this.rooms.stream(), 
-					 							         IntStream.range(floorPrefix, floorPrefix + roomsPerFloor)
-					 							         	      .boxed().map(number -> new Room(number)))
+			 this.rooms = (ArrayList<Room>)Stream.concat(this.rooms.stream(), IntStream.range(floorPrefix, floorPrefix + roomsPerFloor)
+					 							 .boxed().map(number -> new Room(number, this, currentFloor < 2 ? 5 : 10)))
 					                             .collect(Collectors.toList());
 		}
 	}
